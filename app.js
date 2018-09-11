@@ -38,4 +38,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+require('./routes/apiRoutes.js')(app);
+
 module.exports = app;

@@ -2,6 +2,7 @@ module.exports = function(sequelize, DataTypes) {
     var User = sequelize.define('User', {
         id: {type: DataTypes.INTEGER, allowNull: false, primaryKey: true, autoIncrement: true},
         username: {type: DataTypes.STRING, allowNull: false},
+        password: {type: DataTypes.STRING, allowNull: false},
         first_name: {type: DataTypes.STRING, allowNull: false},
         last_name: {type: DataTypes.STRING, allowNull: false},
         age: {type: DataTypes.TINYINT, allowNull: false},
@@ -25,6 +26,9 @@ module.exports = function(sequelize, DataTypes) {
         score_diet: {type: DataTypes.FLOAT, allowNull: false},
         score_habit: {type: DataTypes.FLOAT, allowNull: false},
         score_sleep: {type: DataTypes.FLOAT, allowNull: false}
+    },
+    {
+        timestamps: false
     });
     User.associate = function(models) {
         User.hasMany(models.UserRecommendation, {

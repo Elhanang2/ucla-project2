@@ -5,6 +5,9 @@ module.exports = function(sequelize, DataTypes) {
         description: {type: DataTypes.TEXT, allowNull: false},
         image: {type: DataTypes.STRING, allowNull: true},
         cagetory: {type: DataTypes.STRING, allowNull: false}
+    },
+    {
+        timestamps: false
     });
     Article.associate = function(models) {
         Article.belongsTo(models.Recommendation, {
