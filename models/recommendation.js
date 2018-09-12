@@ -1,7 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
     var Recommendation = sequelize.define("Recommendation", {
         id: {type: DataTypes.INTEGER, allowNull: false, primaryKey: true, autoIncrement: true},
-        category: {type: DataTypes.STRING, allowNull: false},
         text: {type: DataTypes.TEXT, allowNull: false},
         min_score: {type: DataTypes.FLOAT, allowNull: false},
         max_score: {type: DataTypes.FLOAT, allowNull: false}
@@ -18,6 +17,11 @@ module.exports = function(sequelize, DataTypes) {
         });
         Recommendation.hasMany(models.Article, {
             onDelete: 'cascade',
+            foreignKey: {
+                allowNull: false
+            }
+        });
+        Recommendation.belongsTo(models.Category, {
             foreignKey: {
                 allowNull: false
             }
