@@ -21,11 +21,15 @@ module.exports = function(sequelize, DataTypes) {
         smoker: {type: DataTypes.BOOLEAN, allowNull: false},
         workout_hours: {type: DataTypes.FLOAT, allowNull: false},
         diet: {type: DataTypes.BOOLEAN, allowNull: false},
+        sleep: {type: DataTypes.FLOAT, allowNull: false},
+        digestion: {type: DataTypes.BOOLEAN, allowNull: false},
+        num_drinks: {type: DataTypes.INTEGER, allowNull: false},
         work_hours: {type: DataTypes.FLOAT, allowNull: false},
+        low_energy: {type: DataTypes.BOOLEAN, allowNull: false},
         stress_level: {type: DataTypes.TINYINT, allowNull: false},
         score_diet: {type: DataTypes.FLOAT, allowNull: false},
         score_habit: {type: DataTypes.FLOAT, allowNull: false},
-        score_sleep: {type: DataTypes.FLOAT, allowNull: false}
+        score_energy: {type: DataTypes.FLOAT, allowNull: false}
     },
     {
         timestamps: false

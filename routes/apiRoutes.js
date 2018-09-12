@@ -7,7 +7,7 @@ const Op = Sequelize.Op;
 //Questions
 //Do not need create, update, or delete functionality
 //READ all questions
-router.get('/api/questions', function(req, res) {
+router.get('/questions', function(req, res) {
     db.Question.findAll({}).then(function(result) {
         res.status(200);
         return res.json(result);
@@ -20,7 +20,7 @@ router.get('/api/questions', function(req, res) {
 //Articles
 
 //READ articles by category
-router.get('/api/articles/category/:category', function(req, res) {
+router.get('/articles/category/:category', function(req, res) {
     db.Article.findAll({
         where: {
             category: req.params.category
@@ -35,7 +35,7 @@ router.get('/api/articles/category/:category', function(req, res) {
 });
 
 //READ all articles by RecommendationId(foreign key)
-router.get('/api/articles/rec/:id', function(req, res) {
+router.get('/articles/rec/:id', function(req, res) {
     db.Article.findAll({
         where: {
             RecommendationId: req.params.id
@@ -50,7 +50,7 @@ router.get('/api/articles/rec/:id', function(req, res) {
 });
 
 //READ all articles
-router.get('/api/articles', function(req, res) {
+router.get('/articles', function(req, res) {
     db.Article.findAll({}).then(function(result) {
         res.status(200);
         return res.json(result);
@@ -63,7 +63,7 @@ router.get('/api/articles', function(req, res) {
 //Recommendations
 
 //READ all recommendations
-router.get('/api/recommendations', function(req, res) {
+router.get('/recommendations', function(req, res) {
     db.Recommendation.findAll({}).then(function(result) {
         res.status(200);
         return res.json(result);
@@ -74,7 +74,7 @@ router.get('/api/recommendations', function(req, res) {
 });
 
 //READ all recommendations by category
-router.get('/api/recommendations/category/:category', function(req, res) {
+router.get('/recommendations/category/:category', function(req, res) {
     db.Recommendation.findAll({
         where: {
             category: req.params.category
@@ -89,7 +89,7 @@ router.get('/api/recommendations/category/:category', function(req, res) {
 });
 
 //READ recommendation range for certain score
-router.get('/api/recommendations/score/:score', function(req, res) {
+router.get('/recommendations/score/:score', function(req, res) {
     console.log('route hit');
     db.Recommendation.findAll({
         where: {
