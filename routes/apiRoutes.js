@@ -19,11 +19,11 @@ router.get('/questions', function(req, res) {
 
 //Articles
 
-//READ articles by category
+//READ articles by 
 router.get('/articles/category/:category', function(req, res) {
     db.Article.findAll({
         where: {
-            category: req.params.category
+            CategoryId: req.params.category
         }
     }).then(function(result) {
         res.status(200);
@@ -77,7 +77,7 @@ router.get('/recommendations', function(req, res) {
 router.get('/recommendations/category/:category', function(req, res) {
     db.Recommendation.findAll({
         where: {
-            category: req.params.category
+            CategoryId: req.params.category
         }
     }).then(function(result) {
         res.status(200);
@@ -106,6 +106,31 @@ router.get('/recommendations/score/:score', function(req, res) {
         res.status(200);
         return res.json(result);
     }).catch(function(error) {
+        res.status(404);
+        return res.json(error);
+    });
+});
+
+//READ recommendations by score and category
+router.get('/recommendations/:category/:score', function(req, res) {
+    db.Recommendation.findAll({
+        where: {
+            [Op.and]: {
+                CategoryId: req.params.category,
+                [Op.and]: {
+                    min_score: {
+                        [Op.lte]: req.params.score
+                    },
+                    max_score: {
+                        [Op.gte]: req.params.score
+                    }
+                }
+            }
+        }
+    }).then(function(result) {
+        res.status(200);
+        return res.json(result);
+    }).catch(function(error){
         res.status(404);
         return res.json(error);
     });
@@ -149,5 +174,22 @@ router.post('/users', function(req, res) {
         return res.json(error);
     });
 });
+
+//UserRecommendations
+
+//CREATE new record
+router.post('/userrecommendations', function(req, res) {
+    console.log(req.params.rec_id, req.params.user_id);
+    db.UserRecommendation.create({
+        RecommendationId: req.body.RecommendationId,
+        UserId: req.body.UserId
+    }).then(function(result) {
+        res.status(200);
+        return res.json(result);
+    }).catch(function(error) {
+        res.status(404);
+        return res.json(error);
+    });
+})
 
 module.exports = router;
