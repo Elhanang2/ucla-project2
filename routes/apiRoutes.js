@@ -111,4 +111,43 @@ router.get('/recommendations/score/:score', function(req, res) {
     });
 });
 
+//Users
+
+//READ all users
+router.get('/users', function(req, res) {
+    db.User.findAll({}).then(function(result) {
+        res.status(200);
+        return res.json(result);
+    }).catch(function(error){
+        res.status(404);
+        return res.json(error);
+    });
+});
+
+//READ user by ID
+router.get('/users/id/:id', function(req, res) {
+    db.User.findOne({
+        where: {
+            id: req.params.id
+        }
+    }).then(function(result) {
+        res.status(200);
+        return res.json(result);
+    }).catch(function(error) {
+        res.status(404);
+        return res.json(error);
+    });
+});
+
+//CREATE new user
+router.post('/users', function(req, res) {
+    db.User.create(req.body).then(function(result) {
+        res.status(200);
+        return res.json(result);
+    }).catch(function(error) {
+        res.status(404);
+        return res.json(error);
+    });
+});
+
 module.exports = router;
